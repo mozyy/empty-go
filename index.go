@@ -9,7 +9,7 @@ type a struct {
 	CcD interface{} `json:"cc_d,omitempty"`
 }
 
-func main() {
+func main()  {
 	// c := colly.NewCollector(
 	// // colly.Debugger(&debug.LogDebugger{}),
 	// )
