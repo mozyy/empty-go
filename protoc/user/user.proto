@@ -1,0 +1,49 @@
+syntax="proto3";
+
+package user;
+
+import "common/message.proto";
+
+option go_package="empty.yyue.dev/user/proto";
+
+service SMSService {
+  rpc Send(SendRequest) returns (message.Message) {};
+  rpc Validate(ValidateRequest) returns (message.Message) {}
+}
+
+message SendRequest {
+  string mobile = 1;
+}
+
+message ValidateRequest {
+  string mobile = 1;
+  string code = 2;
+}
+
+
+service UserService {
+  rpc Register(UserInfo) returns (message.Message) {}
+  rpc Login(LoginRequest) returns (UserInfo) {}
+  rpc GetInfo(GetInfoRequest) returns (UserInfo) {}
+}
+
+message UserInfo {
+  uint32 id = 1;
+  string name = 4;
+  string mobile = 2;
+  string password = 3;
+  string uuid = 5;
+  int32 state = 6;
+  string create_time = 7;
+  string update_time = 8;
+  string login_time = 9;
+}
+
+message LoginRequest {
+  string mobile = 1;
+  string password = 3;
+}
+
+message GetInfoRequest {
+  string mobile = 1;
+}

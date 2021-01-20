@@ -10,8 +10,8 @@
 			// Options
 			"INSTALL_NODE": "false",
 			"NODE_VERSION": "lts/*",
-			"HTTP_PROXY": "http://172.30.160.1:1080",
-			"HTTPS_PROXY": "http://172.30.160.1:1080",
+			"HTTP_PROXY": "http://172.22.96.1:1080",
+			"HTTPS_PROXY": "http://172.22.96.1:1080",
 		}
 	},
 	"runArgs": [ "--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined" ],
@@ -23,7 +23,11 @@
 		"go.useLanguageServer": true,
 		"go.gopath": "/go",
 		"go.goroot": "/usr/local/go",
-		"go.toolsGopath": "/go/bin"
+		"go.toolsGopath": "/go/bin",
+		"http.proxy": "http://172.22.96.1:1080",
+		"gopls": {
+			"build.allowImplicitNetworkAccess": true
+		}
 	},
 
 	// Add the IDs of extensions you want installed when the container is created.
