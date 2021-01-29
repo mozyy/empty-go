@@ -43,9 +43,9 @@ ENV GOPROXY=https://goproxy.cn,direct
 
 ARG PROTOC_VERSION="3.14.0"
 
-RUN export PROTOC_VERSION="3.14.0" && export PROTOC_ZIP=protoc-${PROTOC_VERSION}-linux-x86_64.zip && \
+RUN su vscode -c "export PROTOC_ZIP=protoc-${PROTOC_VERSION}-linux-x86_64.zip && \
     curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/$PROTOC_ZIP && \
-    sudo unzip $PROTOC_ZIP -d /home/vscode/.local && \
-    rm -f $PROTOC_ZIP
+    unzip $PROTOC_ZIP -d ~/.local && \
+    rm -f $PROTOC_ZIP "
 
-ENV PATH="$PATH:/home/vscode/.local/bin"
+ENV PATH="$PATH:~/.local/bin"
