@@ -1,0 +1,22 @@
+syntax="proto3";
+
+package news;
+
+import "google/api/annotations.proto";
+// import "common/message.proto";
+
+option go_package="empty.yyue.dev/news/proto";
+
+service Greeter {
+	rpc Hello(Request) returns (Response) {
+		option (google.api.http) = { post: "/hello"; body: "*"; };
+	}
+}
+
+message Request {
+	string name = 1;
+}
+
+message Response {
+	string msg = 1;
+}

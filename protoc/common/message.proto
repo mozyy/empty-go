@@ -3,7 +3,7 @@ syntax="proto3";
 package message;
 
 
-option go_package = "go.yyue.dev/common/message";
+option go_package = "empty.yyue.dev/common/message";
 
 // service MessageService {
 //   rpc Message() returns () {}
