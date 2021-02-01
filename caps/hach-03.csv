@@ -1,0 +1,8 @@
+
+BSSID, First time seen, Last time seen, channel, Speed, Privacy, Cipher, Authentication, Power, # beacons, # IV, LAN IP, ID-length, ESSID, Key
+80:8F:1D:C9:A3:63, 2021-02-01 23:39:03, 2021-02-02 00:19:22,  6, 540, WPA2, CCMP, PSK, -53,     9579,     1040,   0.  0.  0.  0,   6, cywzh1, 
+
+Station MAC, First time seen, Last time seen, Power, # packets, BSSID, Probed ESSIDs
+C8:E2:65:8F:9C:6F, 2021-02-01 23:42:44, 2021-02-02 00:18:57, -78,     1380, 80:8F:1D:C9:A3:63,
+76:ED:7A:9D:36:6D, 2021-02-01 23:39:05, 2021-02-02 00:19:14, -72,     4499, 80:8F:1D:C9:A3:63,
+
