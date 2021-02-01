@@ -30,8 +30,8 @@ RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && \
         cnpm install -g @tarojs/cli \
         " 2>&1
 
-ENV http_proxy=$HTTP_PROXY
-ENV https_proxy=$HTTP_PROXY
+ENV http_proxy=${HTTP_PROXY}
+ENV https_proxy=${HTTP_PROXY}
 ENV GO111MODULE=on
 
 RUN go get github.com/asim/go-micro/cmd/protoc-gen-micro/v3
