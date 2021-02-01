@@ -3,7 +3,7 @@ syntax="proto3";
 package news;
 
 import "google/api/annotations.proto";
-// import "common/message.proto";
+import "common/message.proto";
 
 option go_package="empty.yyue.dev/news/proto";
 

@@ -10,8 +10,8 @@
 			// Options
 			"INSTALL_NODE": "true",
 			"NODE_VERSION": "lts/*",
-			"HTTP_PROXY": "http://192.168.32.1:1080",
-			"HTTPS_PROXY": "http://192.168.32.1:1080",
+			"HTTP_PROXY": "http://172.23.192.1:1080",
+			"HTTPS_PROXY": "http://172.23.192.1:1080",
 			// "USERNAME": "none",
 		}
 	},
@@ -25,7 +25,7 @@
 		"go.gopath": "/go",
 		"go.goroot": "/usr/local/go",
 		"go.toolsGopath": "/go/bin",
-		"http.proxy": "http://192.168.32.1:1080",
+		"http.proxy": "http://172.23.192.1:1080",
 		"gopls": {
 			"build.allowImplicitNetworkAccess": true
 		}

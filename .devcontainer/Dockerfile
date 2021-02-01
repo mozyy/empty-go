@@ -34,18 +34,17 @@ ENV http_proxy=$HTTP_PROXY
 ENV https_proxy=$HTTP_PROXY
 ENV GO111MODULE=on
 
-# TODO : remove echo
-RUN echo $http_proxy && echo $GO111MODULE && go get github.com/asim/go-micro/cmd/protoc-gen-micro/v3
+RUN go get github.com/asim/go-micro/cmd/protoc-gen-micro/v3
 
 RUN git clone --depth 1 https://github.com/googleapis/googleapis.git $GOPATH/src/github.com/googleapis/googleapis
 
 ENV GOPROXY=https://goproxy.cn,direct
 
-ARG PROTOC_VERSION="3.14.0"
+ARG PROTOC_VERSION=3.14.0
+ARG PROTOC_ZIP=protoc-${PROTOC_VERSION}-linux-x86_64.zip
 
-RUN su vscode -c "export PROTOC_ZIP=protoc-${PROTOC_VERSION}-linux-x86_64.zip && \
-    curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/$PROTOC_ZIP && \
+RUN su vscode -c "curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_ZIP} && \
     unzip $PROTOC_ZIP -d ~/.local && \
-    rm -f $PROTOC_ZIP "
+    rm -f $PROTOC_ZIP"
 
-ENV PATH="$PATH:~/.local/bin"
+# ENV PATH="$PATH:~/.local/bin"
