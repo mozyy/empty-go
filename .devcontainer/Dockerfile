@@ -55,3 +55,6 @@ RUN su vscode -c "curl -OL https://github.com/protocolbuffers/protobuf/releases/
 
 ENV http_proxy ${HTTP_PROXY}
 ENV https_proxy ${HTTPS_PROXY}
+
+RUN git config --global http.proxy ${HTTP_PROXY} && \
+    git config --global https.proxy ${HTTPS_PROXY}
