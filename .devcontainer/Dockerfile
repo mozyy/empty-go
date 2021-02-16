@@ -11,7 +11,7 @@ ARG HTTPS_PROXY $HTTPS_PROXY
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
-RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1"; fi
+RUN if [ "${INSTALL_NODE}" = "true" ]; then umask 0002 && . /usr/local/share/nvm/nvm.sh && nvm install ${NODE_VERSION} 2>&1; fi
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -19,8 +19,8 @@ RUN if [ "${INSTALL_NODE}" = "true" ]; then su vscode -c "umask 0002 && . /usr/l
 RUN apt-get update
 
 # [Optional] Uncomment the next line to use go get to install anything else you need
-RUN go get -x   google.golang.org/protobuf/cmd/protoc-gen-go \
-                google.golang.org/grpc/cmd/protoc-gen-go-grpc
+# RUN go get -x   google.golang.org/protobuf/cmd/protoc-gen-go \
+#                 google.golang.org/grpc/cmd/protoc-gen-go-grpc
 
 # [Optional] Uncomment this line to install global node packages.
 # RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && npm install -g @tarojs/cli" 2>&1
@@ -29,15 +29,13 @@ RUN go get -x   google.golang.org/protobuf/cmd/protoc-gen-go \
 # --------------- custom ------
 
     # npm install -g cnpm --registry=https://registry.npm.taobao.org && \
-RUN su vscode -c "source /usr/local/share/nvm/nvm.sh && \
-        npm install -g @tarojs/cli \
-        " 2>&1
+# RUN npm install -g @tarojs/cli
 
 ENV GO111MODULE on
 
-RUN curl www.google.com && echo $HTTPS_PROXY
-
-RUN go get github.com/asim/go-micro/cmd/protoc-gen-micro/v3
+RUN go get -u github.com/golang/protobuf/proto && \
+    go get -u github.com/golang/protobuf/protoc-gen-go && \
+    go get github.com/micro/micro/v3/cmd/protoc-gen-micro
 
 RUN git clone --depth 1 https://github.com/googleapis/googleapis.git $GOPATH/src/github.com/googleapis/googleapis
 
@@ -46,9 +44,10 @@ RUN git clone --depth 1 https://github.com/googleapis/googleapis.git $GOPATH/src
 ARG PROTOC_VERSION=3.14.0
 ARG PROTOC_ZIP=protoc-${PROTOC_VERSION}-linux-x86_64.zip
 
-RUN su vscode -c "curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_ZIP} && \
+RUN curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_ZIP} && \
     unzip $PROTOC_ZIP -d ~/.local && \
-    rm -f $PROTOC_ZIP"
+    rm -f $PROTOC_ZIP
+
 
 # ENV PATH="$PATH:~/.local/bin"
 
@@ -58,3 +57,6 @@ ENV https_proxy ${HTTPS_PROXY}
 
 RUN git config --global http.proxy ${HTTP_PROXY} && \
     git config --global https.proxy ${HTTPS_PROXY}
+
+
+RUN go get github.com/micro/micro/v3

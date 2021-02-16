@@ -5,7 +5,7 @@ package news;
 import "google/api/annotations.proto";
 import "common/message.proto";
 
-option go_package="empty.yyue.dev/news/proto";
+option go_package="empty.yyue.dev/news/proto;news";
 
 service Greeter {
 	rpc Hello(Request) returns (Response) {
