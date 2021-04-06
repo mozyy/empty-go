@@ -4,10 +4,6 @@
 ARG VARIANT="1"
 FROM mcr.microsoft.com/vscode/devcontainers/go:0-${VARIANT}
 
-
-ARG HTTP_PROXY $HTTP_PROXY
-ARG HTTPS_PROXY $HTTPS_PROXY
-
 # [Option] Install Node.js
 ARG INSTALL_NODE="true"
 ARG NODE_VERSION="lts/*"
@@ -33,8 +29,8 @@ RUN apt-get update
 
 ENV GO111MODULE on
 
-RUN go get -u github.com/golang/protobuf/proto && \
-    go get -u github.com/golang/protobuf/protoc-gen-go && \
+RUN go get github.com/golang/protobuf/proto && \
+    go get github.com/golang/protobuf/protoc-gen-go && \
     go get github.com/micro/micro/v3/cmd/protoc-gen-micro
 
 RUN git clone --depth 1 https://github.com/googleapis/googleapis.git $GOPATH/src/github.com/googleapis/googleapis
@@ -47,6 +43,12 @@ ARG PROTOC_ZIP=protoc-${PROTOC_VERSION}-linux-x86_64.zip
 RUN curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v${PROTOC_VERSION}/${PROTOC_ZIP} && \
     unzip $PROTOC_ZIP -d ~/.local && \
     rm -f $PROTOC_ZIP
+
+ARG PROTOC_WEB_VERSION=1.2.1
+ARG PROTOC_WEB_ZIP=protoc-gen-grpc-web-${PROTOC_WEB_VERSION}-linux-x86_64
+
+RUN curl -L -o /usr/local/bin/protoc-gen-grpc-web https://github.com/grpc/grpc-web/releases/download/${PROTOC_WEB_VERSION}/${PROTOC_WEB_ZIP} && \
+    chmod +x /usr/local/bin/protoc-gen-grpc-web
 
 
 # ENV PATH="$PATH:~/.local/bin"

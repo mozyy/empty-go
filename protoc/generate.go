@@ -11,7 +11,7 @@ import (
 
 const (
 	goOutPath  = "../"
-	webOutPath = "../../www/client/proto"
+	webOutPath = "./web"
 )
 
 func main() {
@@ -42,8 +42,8 @@ func main() {
 				fmt.Sprintf("--go_out=%s", goOutPath),
 				// fmt.Sprintf("--go_out=plugins=micro:%s", goOutPath),
 				// js
-				// fmt.Sprintf("--js_out=import_style=commonjs,binary:%s", webOutPath),
-				// fmt.Sprintf("--grpc-web_out=import_style=typescript,mode=grpcwebtext:%s", webOutPath),
+				fmt.Sprintf("--js_out=import_style=commonjs,binary:%s", webOutPath),
+				fmt.Sprintf("--grpc-web_out=import_style=typescript,mode=grpcwebtext:%s", webOutPath),
 				relPath,
 			}
 			cmd := exec.Command("protoc", args...)
